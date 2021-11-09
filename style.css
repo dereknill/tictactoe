@@ -39,7 +39,10 @@ body {
 }
 
 #game-board {
-  width: 100%;
+  width: 600px;
+  height: 600px;
+  max-width: 95vw;
+  max-height: 95vw;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -48,19 +51,30 @@ body {
   margin-bottom: 20px;
 }
 
+.tile-container {
+  display: block;
+  overflow: hidden;
+}
 .tile {
   background-color: var(--border-color);
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 200px;
+  line-height: 100%;
+  display: block;
+  padding: 0;
+  text-align: center;
   font-weight: bold;
+  font-size: 200px;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 600px) {
+  .tile {
+    font-size: 25vw;
+  }
 }
 .content {
-  width: 600px;
-  max-width: 95%;
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
