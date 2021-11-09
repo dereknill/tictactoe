@@ -59,8 +59,8 @@ body {
   font-weight: bold;
 }
 .content {
-  max-width: 95%;
   width: 600px;
+  max-width: 95%;
   height: 100vh;
   display: flex;
   flex-direction: column;
