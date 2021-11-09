@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+}
+
+button {
+  border: 0;
+}
+:root {
+  --main-bg-color: #1f2833;
+  --title-font-color: #66fcf1;
+  --border-color: #c5c6c7;
+}
+
+body {
+  background: linear-gradient(var(--main-bg-color), black);
+  font-family: "Roboto", sans-serif;
+  color: white;
+}
+
+#title {
+  font-family: "PT Sans", sans-serif;
+  font-size: 7rem;
+  color: var(--title-font-color);
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+#subtitle {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+#menu-content {
+  display: flex;
+}
+
+#game-content {
+  display: none;
+}
+
+#game-board {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tile {
+  background-color: var(--border-color);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 200px;
+  font-weight: bold;
+}
+.content {
+  max-width: 95%;
+  width: 600px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.menu-button {
+  min-width: 100px;
+  border: 3px solid var(--border-color);
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px 20px;
+  text-align: center;
+  background-color: inherit;
+  color: white;
+}
+
+.menu-button:hover {
+  background-color: var(--title-font-color);
+  color: black;
+  border-color: black;
+}
