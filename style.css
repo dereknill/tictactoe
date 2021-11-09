@@ -19,10 +19,16 @@ body {
 
 #title {
   font-family: "PT Sans", sans-serif;
-  font-size: 7rem;
+  font-size: 150px;
   color: var(--title-font-color);
   font-weight: bold;
   margin: 20px 0;
+}
+
+@media screen and (max-width: 700px) {
+  #title {
+    font-size: 17vw;
+  }
 }
 
 #subtitle {
