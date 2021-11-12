@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 button {
@@ -104,4 +106,51 @@ body {
   background-color: var(--title-font-color);
   color: black;
   border-color: black;
+}
+
+#result-message {
+  position: absolute;
+  display: none;
+  background-color: black;
+  font-size: 100px;
+  color: white;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  transform: translate(0, -50%);
+  white-space: nowrap;
+  padding: 5px 10px;
+}
+
+@media screen and (max-width: 700px) {
+  #result-message {
+    font-size: 13vw;
+  }
+}
+
+#name-screen {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  max-width: 95vw;
+  max-height: 95vw;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+#name-screen * {
+  display: block;
+}
+
+#name-screen input {
+  margin-bottom: 20px;
 }

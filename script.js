@@ -1,6 +1,8 @@
 const gameBoardDiv = document.querySelector("#game-board");
 const menuContentDiv = document.querySelector("#menu-content");
 const gameContentDiv = document.querySelector("#game-content");
+const resultMessageDiv = document.querySelector("#result-message");
+const playerNameDiv = document.querySelector("#name-screen");
 
 const playerFactory = (playerName, playerSymbol) => {
   let isMyTurn = false;
@@ -187,22 +189,29 @@ var gameBoard = (() => {
 var game = (() => {
   gameBoard.resetBoard();
 
+  let setResultMessageVisibility = (visible) => {
+    if (visible) {
+      resultMessageDiv.style.display = "block";
+    } else {
+      resultMessageDiv.style.display = "none";
+    }
+  };
   // State
   let numTurns = 0;
   let gameInSession = false;
 
-  // Create Players
-  let player1 = playerFactory("Player 1", "X");
-  let player2 = playerFactory("Player 2", "O");
+  // Create Player variables
+  let player1;
+  let player2;
 
   var startGame = () => {
     menuContentDiv.style.display = "none";
     gameContentDiv.style.display = "flex";
+    setResultMessageVisibility(false);
     gameBoard.resetBoard();
     player1.setTurn(true);
     player2.setTurn(false);
     gameInSession = true;
-    console.log("got here");
     numTurns = 0;
   };
 
@@ -238,24 +247,44 @@ var game = (() => {
   };
 
   // Function to be called when a player has won
-  let playerWon = () => {
-    console.log("Winner!");
+  let playerWon = (winner) => {
+    setResultMessageVisibility(true);
+    resultMessageDiv.innerHTML = `${winner} Won!`;
   };
 
   // Function to be called when the game is a draw
 
-  let playerDraw = () => {};
-
-  var startGameButtonHandler = () => {
-    startGame();
+  let playerDraw = () => {
+    setResultMessageVisibility(true);
+    resultMessageDiv.innerHTML = "Draw";
   };
+
+  function startGameButtonHandler() {
+    playerNameDiv.style.display = "flex";
+  }
 
   var backButtonHandler = () => {
     gameContentDiv.style.display = "none";
     menuContentDiv.style.display = "flex";
+    setResultMessageVisibility(false);
   };
 
   var resetButtonHandler = () => {
+    startGame();
+  };
+
+  var playerNameButtonHandler = () => {
+    // Create players
+    player1Name = document.getElementById("player1name").value;
+    player2Name = document.getElementById("player2name").value;
+    player1 = playerFactory(player1Name, "X");
+    player2 = playerFactory(player2Name, "O");
+
+    // Set div visibility
+    menuContentDiv.style.display = "none";
+    gameContentDiv.style.display = "flex";
+    playerNameDiv.style.display = "none";
+
     startGame();
   };
 
@@ -264,5 +293,6 @@ var game = (() => {
     startGameButtonHandler,
     backButtonHandler,
     resetButtonHandler,
+    playerNameButtonHandler,
   };
 })();
