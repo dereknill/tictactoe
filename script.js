@@ -22,6 +22,20 @@ const playerFactory = (playerName, playerSymbol) => {
   };
 };
 
+var computerPlayerController = (() => {
+  var placeMarker = () => {
+    while (true) {
+      let guess = Math.floor(Math.random() * 9);
+      if (game.computerMarkerPlacer(guess)) {
+        break;
+      }
+    }
+  };
+  return {
+    placeMarker,
+  };
+})();
+
 // GameBoard module function
 var gameBoard = (() => {
   let TileFactory = (tileDivRef) => {
@@ -199,6 +213,7 @@ var game = (() => {
   // State
   let numTurns = 0;
   let gameInSession = false;
+  let computerPlayer = false;
 
   // Create Player variables
   let player1;
@@ -218,7 +233,7 @@ var game = (() => {
   // Click Handlers for Buttons
   var tileClickHandler = (index) => {
     if (!gameInSession) {
-      return;
+      return false;
     }
     var playerSymbol;
     var playerName;
@@ -230,7 +245,40 @@ var game = (() => {
       playerName = player2.getPlayerName();
     }
 
+    _tryPlaceMarker(index, playerSymbol, playerName);
+    if (computerPlayer && player2.getTurn() && gameInSession) {
+      computerPlayerController.placeMarker();
+    }
+  };
+
+  var _tryPlaceMarker = (index, playerSymbol, playerName) => {
     if (gameBoard.setTile(index, playerSymbol, playerName)) {
+      player1.setTurn(!player1.getTurn());
+      player2.setTurn(!player2.getTurn());
+      numTurns++;
+      let winner = gameBoard.checkForWinner();
+      if (winner != null) {
+        playerWon(winner);
+        gameInSession = false;
+        return false;
+      } else if (numTurns >= 9) {
+        playerDraw();
+        console.log("Draw!");
+        gameInSession = false;
+        return false;
+      }
+      return true;
+    }
+  };
+
+  var computerMarkerPlacer = (index) => {
+    if (
+      gameBoard.setTile(
+        index,
+        player2.getPlayerSymbol(),
+        player2.getPlayerName()
+      )
+    ) {
       player1.setTurn(!player1.getTurn());
       player2.setTurn(!player2.getTurn());
       numTurns++;
@@ -243,7 +291,9 @@ var game = (() => {
         console.log("Draw!");
         gameInSession = false;
       }
+      return true;
     }
+    return false;
   };
 
   // Function to be called when a player has won
@@ -263,9 +313,14 @@ var game = (() => {
     playerNameDiv.style.display = "flex";
   }
 
+  function startGameComputerButtonHandler() {
+    playerNameDiv.style.display = "flex";
+    computerPlayer = true;
+  }
   var backButtonHandler = () => {
     gameContentDiv.style.display = "none";
     menuContentDiv.style.display = "flex";
+    computerPlayer = false;
     setResultMessageVisibility(false);
   };
 
@@ -294,5 +349,8 @@ var game = (() => {
     backButtonHandler,
     resetButtonHandler,
     playerNameButtonHandler,
+    startGameComputerButtonHandler,
+    computerMarkerPlacer,
+    numTurns,
   };
 })();
