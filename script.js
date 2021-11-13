@@ -317,10 +317,14 @@ var game = (() => {
 
   function startGameButtonHandler() {
     playerNameDiv.style.display = "flex";
+    document.getElementById("player1name").value = "";
+    document.getElementById("player2name").value = "";
   }
 
   function startGameComputerButtonHandler() {
     playerNameDiv.style.display = "flex";
+    document.getElementById("player1name").value = "";
+    document.getElementById("player2name").value = "Computer";
     computerPlayer = true;
   }
   var backButtonHandler = () => {
