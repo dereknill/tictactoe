@@ -55,7 +55,8 @@ var gameBoard = (() => {
         return false;
       }
       playerOwnerName = newOwnerName;
-      tileDivRef.innerHTML = newValue;
+      tileDivRef.innerHTML =
+        "<span class='tile-text-fade-in'>" + newValue + "</span>";
       value = newValue;
       isOpen = false;
       return true;
@@ -235,6 +236,9 @@ var game = (() => {
     if (!gameInSession) {
       return false;
     }
+    if (player2.getTurn() && computerPlayer) {
+      return false;
+    }
     var playerSymbol;
     var playerName;
     if (player1.getTurn()) {
@@ -247,7 +251,9 @@ var game = (() => {
 
     _tryPlaceMarker(index, playerSymbol, playerName);
     if (computerPlayer && player2.getTurn() && gameInSession) {
-      computerPlayerController.placeMarker();
+      setTimeout(() => {
+        computerPlayerController.placeMarker();
+      }, 500);
     }
   };
 
@@ -351,6 +357,5 @@ var game = (() => {
     playerNameButtonHandler,
     startGameComputerButtonHandler,
     computerMarkerPlacer,
-    numTurns,
   };
 })();

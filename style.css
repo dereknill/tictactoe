@@ -7,6 +7,14 @@
 button {
   border: 0;
 }
+
+button:active {
+  background-color: inherit;
+}
+
+button:focus {
+  background-color: inherit;
+}
 :root {
   --main-bg-color: #1f2833;
   --title-font-color: #66fcf1;
@@ -25,6 +33,7 @@ body {
   color: var(--title-font-color);
   font-weight: bold;
   margin: 20px 0;
+  text-shadow: 1px 1px 2px #c5c6c7;
 }
 
 @media screen and (max-width: 700px) {
@@ -74,6 +83,7 @@ body {
   font-weight: bold;
   font-size: 200px;
   overflow: hidden;
+  text-shadow: 2px 2px 5px black;
 }
 
 @media screen and (max-width: 600px) {
@@ -89,6 +99,7 @@ body {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+  animation: fade-in linear 0.3s;
 }
 
 .menu-button {
@@ -120,6 +131,7 @@ body {
   transform: translate(0, -50%);
   white-space: nowrap;
   padding: 5px 10px;
+  animation: fade-in linear 0.3s;
 }
 
 @media screen and (max-width: 700px) {
@@ -145,6 +157,7 @@ body {
   text-align: center;
   transform: translate(-50%, -50%);
   white-space: nowrap;
+  animation: fade-in linear 0.3s;
 }
 
 #name-screen * {
@@ -154,4 +167,21 @@ body {
 #name-screen input {
   margin-bottom: 20px;
   padding: 5px;
+}
+
+#name-screen label {
+  margin-bottom: 5px;
+}
+
+.tile-text-fade-in {
+  animation: fade-in linear 0.2s;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
